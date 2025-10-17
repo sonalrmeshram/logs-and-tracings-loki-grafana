@@ -123,19 +123,28 @@ scrape_configs:
       path: /var/log/journal
       labels:
         job: systemd
-        host: \${HOSTNAME}
+        host: ${HOSTNAME}
     relabel_configs:
       - source_labels: ['__journal__systemd_unit']
         target_label: 'unit'
 
-  - job_name: varlogs
+  - job_name: apache2
     static_configs:
       - targets:
           - localhost
         labels:
           job: varlogs
-          host: \${HOSTNAME}
-          __path__: /var/log/*.log
+          host: ${HOSTNAME}
+          __path__: /var/log/apache2/access.log
+
+  - job_name: varerror
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: varerror
+          host: ${HOSTNAME}
+          __path__: /var/log/apache2/error.log
 EOF
 
 # Promtail service

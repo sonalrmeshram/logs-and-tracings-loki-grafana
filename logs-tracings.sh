@@ -145,6 +145,16 @@ scrape_configs:
           job: varerror
           host: ${HOSTNAME}
           __path__: /var/log/apache2/error.log
+          
+  - job_name: python-app
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: python-app
+          host: ${HOSTNAME}
+          __path__: /var/log/python-app/*.log
+
 EOF
 
 # Promtail service

@@ -128,21 +128,21 @@ scrape_configs:
       - source_labels: ['__journal__systemd_unit']
         target_label: 'unit'
 
-  - job_name: apache2
+  - job_name: apache2-access
     static_configs:
       - targets:
           - localhost
         labels:
-          job: varlogs
+          job: apache2-access
           host: ${HOSTNAME}
           __path__: /var/log/apache2/access.log
 
-  - job_name: varerror
+  - job_name: apache-error
     static_configs:
       - targets:
           - localhost
         labels:
-          job: varerror
+          job: apache2-error
           host: ${HOSTNAME}
           __path__: /var/log/apache2/error.log
           
